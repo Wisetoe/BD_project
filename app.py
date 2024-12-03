@@ -15,8 +15,30 @@ def db_connection():
 def index():
     conn = db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT Name.name, Tovar.name, Orders.colvo, Tovar.price * Orders.colvo AS TotalSum From Orders, Name, Tovar Where Orders.tovar_id = Tovar.ID and Orders.name_id = Name.ID;")
+    cur.execute("SELECT * From Name")
     out = cur.fetchall()
     cur.close()
     conn.close()
     return render_template('index.html', out=out)
+@app.route('/tovar/')
+def tovar():
+    conn = db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * From tovar")
+    out = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('tovar.html', out=out)
+@app.route('/orders/')
+def order():
+    conn = db_connection()
+    cur = conn.cursor()
+    cur.execute("""select orders.id, orders.colvo, name.name, tovar.name, orders.colvo * tovar.price as totalsum from orders, tovar, name
+                where orders.tovar_id = tovar.id
+                and orders.name_id = name.id""")
+    out = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('orders.html', out=out)
+if __name__ == '__main__':
+    app.run()

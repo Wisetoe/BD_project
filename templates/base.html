@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main{
+            margin-top: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: auto;
+        }
+        table {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+            text-align: left;
+            border-collapse: separate;
+            border-spacing: 5px;
+            background: #ECE9E0;
+            color: #656665;
+            border: 16px solid #ECE9E0;
+            border-radius: 20px;
+            }
+            th {
+            font-size: 18px;
+            padding: 10px;
+            }
+            td {
+            background: #F5D7BF;
+            padding: 10px;
+            }
+            nav{
+                width: 400px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            a{
+                text-decoration: none;
+                color: black;
+            }
+    </style>
+</head>
+<body>
+    <main>
+    {% block content %} {% endblock %}
+        <h2>Таблицы</h2>
+        <nav>
+            <a href="{{ url_for('index') }}">Name</a>
+            <a href="{{ url_for('tovar') }}">Tovar</a>
+            <a href="{{ url_for('order') }}">Orders</a>
+        </nav>
+    </main>
+</body>
+</html>
